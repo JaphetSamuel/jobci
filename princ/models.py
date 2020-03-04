@@ -60,5 +60,12 @@ class Compte(models.Model):
 class Candidat(models.Model):
     compte = models.OneToOneField(Compte, on_delete=models.CASCADE)
     qualifications = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.compte
+    
+    def is_connected(self):
+        return compte.user.last_login
+    
     
     
