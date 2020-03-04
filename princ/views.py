@@ -8,7 +8,8 @@ from .models import *
 
 def home(request):
     jobs = Job.objects.order_by("-pub_date")[:5]
-    return render(request,"home.html",context={"jobs":jobs})
+    cat_list = Job.Categories
+    return render(request,"home.html",context={"jobs":jobs,"cat_list":cat_list})
 
 class JobListView(ListView):
     model = Job
@@ -20,6 +21,7 @@ class JobListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["nb_jobs"] = Job.objects.count()
+        context["cat_list"] = Job.Categories
         return context
 
 
