@@ -6,14 +6,14 @@ from django.contrib.auth.models import User
 
 class Job (models.Model):
 
-    jobtype = (
+    jobtype = [
         ("CDD", "CDD"),
         ("CDI", "CDI"),
         ("Interim","Interim"),
         ("Freelance","Freelance")
-    )
+    ]
 
-    Categories = (
+    Categories = [
         ("enseignement","Enseignement education"),
         ("earketing","Marketing"),
         ("eelemarketing","Telemarketing"),
@@ -21,15 +21,15 @@ class Job (models.Model):
         ("batiment","Batiments et design"),
         ("administration","Administration"),
         ("autre","Autres")
-    )
+    ]
 
-    Experiences = (
+    Experiences = [
         ("non","Non spécifié"),
         ("Debutant","Debutant"),
         ("junior","1 à 2 ans d'experiences"),
         ("moyen", "2 à 6 ans d'experiences"),
         ("senior","plus de 6 ans d'experiences")
-    )
+    ]
 
     posteur = models.ForeignKey('Compte', on_delete= models.CASCADE, blank=True)
     titre = models.CharField(max_length=200, blank=False)
@@ -51,21 +51,20 @@ class Job (models.Model):
 class Compte(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.TextField()
-    img_profil = models.FileField(upload_to="img/candiateds", default = "img/svg_icon/1.svg")
+    img_profil = models.FileField(upload_to="img/brand/", default = "img/svg_icon/1.svg")
     register_date = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.user.username
 
 class Candidat(models.Model):
-    compte = models.OneToOneField(Compte, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
     qualifications = models.CharField(max_length=100)
+    img_profile = models.ImageField(upload_to="img/candiateds/", blank=True, default="img/candiateds/8.png")
 
     def __str__(self):
-        return self.compte
-    
-    def is_connected(self):
-        return compte.user.last_login
+        return self.user.username
+
     
     
     

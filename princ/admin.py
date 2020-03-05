@@ -14,5 +14,4 @@ class JobAdmin(admin.ModelAdmin):
 
 @admin.register(Candidat)
 class CandidatAdmin(admin.ModelAdmin):
-    list_display = ["__str__","is_connected","qualifications"]
     pass

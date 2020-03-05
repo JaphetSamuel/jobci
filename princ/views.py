@@ -17,12 +17,32 @@ class JobListView(ListView):
     context_object_name = "jobs"
     paginate_by = 10
     allow_empty = True
+    queryset = Job.objects.all().order_by("pub_date")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["nb_jobs"] = Job.objects.count()
         context["cat_list"] = Job.Categories
+        context["exp_list"] = Job.Experiences
+        context["type_list"] = Job.jobtype
         return context
+    
+    def get(self,request,*args, **kwargs):
+        #traitement de la requete
+        if request.GET.__len__() >= 3:
+            mot_cle = request.GET["motcle"]
+            lieu = request.GET["lieu"]
+            experience = request.GET["experience"]
+            categorie = request.GET["categorie"]
+            contrat = request.GET["contrat"]
+
+            if contrat != "-" :
+                qs1 = Job.objects.filter(type__icontains=contrat)
+            
+            self.queryset.intersection(qs1)
+        
+        
+        return super().get(request,**kwargs)
 
 
 class JobDetailsView(DetailView):
