@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from .models import *
+from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
@@ -52,3 +53,8 @@ class JobDetailsView(DetailView):
     model = Job
     template_name = 'princ/job_detail.html'
     context_object_name = 'job'
+
+
+class Connection(LoginView):
+    template_name = "registration/login"
+    success_url = "/"

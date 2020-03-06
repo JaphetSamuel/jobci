@@ -1,0 +1,12 @@
+{% extends 'home.html' %}
+
+{% block home-main %}
+    {% if form.errors %}
+        <p>Erreur dans les données renseignées</p>
+    {% endif %}
+    <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+        {{form.as_p}}
+    <button type="submit">Connexion</button>
+    </form>
+{% endblock home-main %}
