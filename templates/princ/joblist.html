@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text">
-                        <h3>{{nb_jobs}}+ Jobs Disponibles</h3>
+                        <h3>{{nb_job}}+ Jobs Disponibles {% if list_type %}liste type existe{% endif %} </h3>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                                             <label for="contr">contrat</label><br>
                                             <select class="wide" name="contrat" id="contr">
                                                 <option data-display="-">-</option>
-                                                {% for type in type_list %}
+                                                {% for type in list_type %}
                                                     <option value="{{type}}">{{type}}</option>
                                                 {% endfor %}
                                             </select>
@@ -88,7 +88,7 @@
                         <div class="recent_joblist white-bg ">
                             <div class="row align-items-center">
                                 <div class="col-md-6">
-                                    <h4>{{object_list.__len__()}} jobs trouver</h4>
+                                    <h4> jobs trouver</h4>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="serch_cat d-flex justify-content-end">

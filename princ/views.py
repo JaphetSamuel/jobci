@@ -21,10 +21,7 @@ class JobListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["nb_jobs"] = Job.objects.count()
-        context["cat_list"] = Job.Categories
-        context["exp_list"] = Job.Experiences
-        context["type_list"] = Job.jobtype
+        context["nb_job"] = Job.objects.count()
         return context
     
     def get(self,request,*args, **kwargs):
@@ -38,10 +35,16 @@ class JobListView(ListView):
 
             if contrat != "-" :
                 qs1 = Job.objects.filter(type__icontains=contrat)
+                self.queryset.intersection(qs1)
             
-            self.queryset.intersection(qs1)
-        
-        
+            if experience != "-":
+                qs2 = Job.objects.filter(experience__icontains=experience)
+                self.queryset.intersection(qs2)
+            
+            if categorie != "-":
+                qs3 = Job.objects.filter(categorie__icontains=categorie)
+                self.queryset.intersection(qs3)
+            
         return super().get(request,**kwargs)
 
 
