@@ -125,3 +125,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,"styles/"),]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"medias/")
+
+#variable d'authentification
+
+LOGOUT_REDIRECT_URL = "/accounts/connexion/"

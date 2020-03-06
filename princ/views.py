@@ -22,7 +22,7 @@ class JobListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["nb_job"] = Job.objects.count()
+        context["nb_query"] = self.queryset.count()
         return context
     
     def get(self,request,*args, **kwargs):
@@ -53,8 +53,3 @@ class JobDetailsView(DetailView):
     model = Job
     template_name = 'princ/job_detail.html'
     context_object_name = 'job'
-
-
-class Connection(LoginView):
-    template_name = "registration/login"
-    success_url = "/"

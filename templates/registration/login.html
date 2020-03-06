@@ -1,12 +1,44 @@
 {% extends 'home.html' %}
 
 {% block home-main %}
-    {% if form.errors %}
-        <p>Erreur dans les données renseignées</p>
-    {% endif %}
-    <form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
-        {{form.as_p}}
-    <button type="submit">Connexion</button>
-    </form>
+    <style>
+        input[type="text"], input[type="password"]{
+            display: block;
+            width: 100%;
+            line-height: 40px;
+            border: none;
+            outline: none;
+            background: #f9f2ff;
+            padding: 0 20px;
+        }
+
+        label {
+            color = #f9f9ff;
+        }
+    </style>
+    <div class="slider_area">
+        <div class="single_slider  d-flex align-items-center slider_bg_1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-7 col-md-6">
+                        {% if request.user.is_authenticated %} request.user.username est déjé authentifié{% endif %}
+                        {% if form.errors %}
+                            <p>Erreur dans les données renseignées</p>
+                        {% endif %}
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <button type="submit" class="genric-btn info radius">Connexion</button>
+                            <input type="hidden" name="next" value="/">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ilstration_imgwow fadeInRight d-none d-lg-block text-right" data-wow-duration="1s" data-wow-delay=".2s">
+            <img src="{{MEDIA_URL}}{{MEDIA_URL}}img/banner/illustration.png" alt="">
+        </div>
+    </div>
+    
 {% endblock home-main %}

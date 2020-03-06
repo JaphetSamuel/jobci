@@ -19,6 +19,7 @@ def mescontext(req):
         "monmsg":"le message nous parle de jesus",
         "list_type" : list_type,
         "cat_list":cat_list,
-        "exp_list": exp_list
+        "exp_list": exp_list,
+        "nb_job": Job.objects.count(),
     }
     

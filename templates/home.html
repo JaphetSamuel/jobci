@@ -20,7 +20,7 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="index.html">Accueil</a></li>
-                                            <li><a href="jobs.html">Recherche</a></li>
+                                            <li><a href="{% url 'joblist' %}">Recherche</a></li>
                                             <li><a href="#">page <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="candidate.html">Candidats </a></li>
@@ -39,9 +39,19 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                                 <div class="Appointment">
+                                    {% if request.user.is_authenticated %}
+                                    <div class="phone_num d-none d-xl-block">
+                                        <a href="#">{{request.user.username}} <i class="ti-angle-down"></i> </a>
+                                        <ul class="submenu">
+                                            <li><a href="">mon profile</a></a></li>
+                                            <li><a href="{% url 'logout' %}">Deconnexion</a></a></li>
+                                        </ul>
+                                    </div>
+                                    {% else %}
                                     <div class="phone_num d-none d-xl-block">
                                         <a href="{% url 'login' %}">Se connecter</a>
                                     </div>
+                                    {% endif %}
                                     <div class="d-none d-lg-block">
                                         <a class="boxed-btn3" href="#">Poster un job</a>
                                     </div>
@@ -65,7 +75,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-7 col-md-6">
                         <div class="slider_text">
-                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">4536+ Jobs listed</h5>
+                            <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">{{nb_job}} disponible </h5>
                             <h3 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">Trouver le meilleur job</h3>
                             <p class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".4s">We provide online instant cash loans with quick approval that suit your term length</p>
                             <div class="sldier_btn wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".5s">
