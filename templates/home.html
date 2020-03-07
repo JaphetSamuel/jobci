@@ -41,7 +41,11 @@
                                 <div class="Appointment">
                                     {% if request.user.is_authenticated %}
                                     <div class="phone_num d-none d-xl-block">
-                                        <a href="#">{{request.user.username}} <i class="ti-angle-down"></i> </a>
+                                        {% if request.user.candidat %}
+                                            <a href="{% url 'candidate-details' request.user.candidat.id %}">
+                                                {{request.user.username}} <i class="ti-angle-down"></i> 
+                                            </a>
+                                        {% endif %}
                                         <ul class="submenu">
                                             <li><a href="">mon profile</a></a></li>
                                             <li><a href="{% url 'logout' %}">Deconnexion</a></a></li>
@@ -250,7 +254,7 @@
                             <div class="jobs_right">
                                 <div class="apply_now">
                                     <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
-                                    <a href="job_details.html" class="boxed-btn3">Postuler</a>
+                                    <a href="{% url 'apply_url' job.id %}" class="boxed-btn3">Postuler</a>
                                 </div>
                                 <div class="date">
                                     <p>Date line:{{job.pub_date}}</p>

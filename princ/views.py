@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from .models import *
@@ -53,3 +53,21 @@ class JobDetailsView(DetailView):
     model = Job
     template_name = 'princ/job_detail.html'
     context_object_name = 'job'
+
+class CandidatDetailsView(DetailView):
+    template_name = "registration/profile.html"
+    context_object_name = "can"
+    model = Candidat
+
+    def get_context_data(self,*args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user and self.request.user == self.get_object().user:
+            context["own"] = True
+        return context
+
+def Applymiddleware(request, id_job):
+    _job = Job.objects.get(id=id_job)
+    _candidat = request.user.candidat
+    apply = Apply.objects.create(candidat=_candidat, job = _job)
+    apply.save()
+    return redirect(f"/candidat/details/{_candidat.id}")

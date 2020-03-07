@@ -61,10 +61,20 @@ class Candidat(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
     qualifications = models.CharField(max_length=100)
     img_profile = models.ImageField(upload_to="img/candiateds/", blank=True, default="img/candiateds/8.png")
+    cv = models.FileField(upload_to="cv/",blank=True)
+    description = models.TextField(default="vide")
+
 
     def __str__(self):
         return self.user.username
 
+class Apply(models.Model):
+    candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField(auto_now=True)
+    proposition = models.IntegerField(default=0)
     
+    def __str__(self):
+        return f"{self.candidat} a postuler pour {self.job}"
     
     

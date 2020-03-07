@@ -15,3 +15,7 @@ class JobAdmin(admin.ModelAdmin):
 @admin.register(Candidat)
 class CandidatAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Apply)
+class ApplyAdmin(admin.ModelAdmin):
+    pass
